@@ -1,4 +1,4 @@
-FROM kasmweb/core-ubuntu-focal:1.16.1-rolling-daily
+FROM kasmweb/core-ubuntu-jammy:1.17.0
 USER root
 
 # Kasm core image conventions (do not change these)
