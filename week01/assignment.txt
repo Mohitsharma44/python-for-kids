@@ -1,0 +1,61 @@
+# Week 1 Assignment: Gold Collector Game
+
+## 🎮 How to Get Started:
+1. Open `gold_collector_game.py` in your code editor
+2. Run the game to see how it works
+3. Follow the instructions in the code to unlock new features!
+
+## Learning Objectives:
+- Understand basic game programming concepts
+- Learn about variables, functions, and control flow
+- Practice keyboard input and collision detection
+- Explore randomness in programming
+
+## 🚀 Step-by-Step Challenges:
+
+### Step 1: Understanding the Basics (Beginner)
+1. Run the game and collect 5 coins. What happens?
+2. Look at the code and find where the player's speed is set
+3. Change the speed to 10. What happens? Try speed = 2. What happens?
+4. Find the line that sets the background color. Change it to a different color!
+
+### Step 2: Unlocking Sprites (Intermediate)
+1. Find the line `USE_SPRITES = False` and change it to `USE_SPRITES = True`
+2. Run the game again. What changed?
+3. Look at the console output. What message do you see?
+4. If you don't have the images, the game will still work with shapes!
+
+### Step 3: Random Movement (Advanced)
+1. Find the line `USE_RANDOM_MOVEMENT = False` and change it to `True`
+2. Run the game and collect a coin. What's different now?
+3. Look at the console output when you collect coins
+4. Find the `move_coin_to_new_position()` function. What does it do?
+
+### Step 4: Experimentation (Creative)
+1. Change the player's color by modifying the RGB values
+2. Change the coin's color
+3. Add a new variable called `player_size` and make the player bigger or smaller
+4. Try changing the window size (WIDTH and HEIGHT)
+
+## 🤔 Thinking Questions:
+1. Why do we use `max()` and `min()` functions for player movement?
+2. What's the difference between `USE_SPRITES = True` and `USE_SPRITES = False`?
+3. How does the game know when you've collected a coin?
+4. What happens if you remove the `global score` line?
+
+## 🎯 Bonus Challenges:
+1. Add a timer that counts down from 60 seconds
+2. Create multiple coins that appear at the same time
+3. Add obstacles that the player should avoid
+4. Make the coin move automatically every 3 seconds
+
+## 💡 Tips for Success:
+- Save your work before making changes!
+- If something breaks, you can always copy the original code back
+- Try changing one thing at a time
+- Don't be afraid to experiment - that's how you learn!
+
+## 🔧 Troubleshooting:
+- **Game won't run?** Make sure you have Pygame Zero installed
+- **Images not showing?** That's okay! The game works with shapes too
+- **Code has errors?** Check that you didn't accidentally delete any important lines
