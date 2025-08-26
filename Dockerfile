@@ -25,14 +25,14 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
 COPY requirements.txt /tmp/requirements.txt
 RUN pip3 install --no-cache-dir -r /tmp/requirements.txt && rm /tmp/requirements.txt
 
-# Desktop launcher for Thonny (opens the Desktop/Projects folder)
-RUN printf '#!/bin/bash\nTHONNY_DIR="$HOME/Desktop/Projects"\nmkdir -p "$THONNY_DIR"\nthonny "$THONNY_DIR"\n' \
+# Desktop launcher for Thonny (simple)
+RUN printf '#!/bin/bash\nexec thonny\n' \
       > /usr/local/bin/launch_thonny && \
     chmod +x /usr/local/bin/launch_thonny && \
     mkdir -p "$HOME/Desktop" && \
-    printf '[Desktop Entry]\nType=Application\nName=Start Here (Thonny)\nExec=/usr/local/bin/launch_thonny\nIcon=utilities-terminal\nTerminal=false\n' \
-      > "$HOME/Desktop/start-here.desktop" && \
-    chmod +x "$HOME/Desktop/start-here.desktop"
+    printf '[Desktop Entry]\nType=Application\nName=Thonny (Python IDE)\nComment=Launch Thonny IDE\nExec=/usr/local/bin/launch_thonny\nIcon=thonny\nTerminal=false\nCategories=Development;Education;\nStartupNotify=true\n' \
+      > "$HOME/Desktop/thonny.desktop" && \
+    chmod +x "$HOME/Desktop/thonny.desktop"
 
 
 ######### End Customizations ###########
