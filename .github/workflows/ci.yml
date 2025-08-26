@@ -65,8 +65,13 @@ jobs:
         with:
           context: .
           push: true
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          pull: true
+          cache-from: |
+            type=gha
+            type=registry,ref=mohitsharma44/python-for-kids:buildcache
+          cache-to: |
+            type=gha,mode=max
+            type=registry,ref=mohitsharma44/python-for-kids:buildcache,mode=max,ignore-error=true
           tags: |
             mohitsharma44/python-for-kids:${{ steps.tag.outputs.new_tag }}
             mohitsharma44/python-for-kids:latest
