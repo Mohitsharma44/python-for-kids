@@ -1,0 +1,184 @@
+# Week 2 Assignment: Star Dodger 🚀
+
+## 🎮 How to Get Started:
+1. Open `star_dodger.py` in your code editor
+2. Run the game — dodge the falling asteroids!
+3. Follow the challenges below to learn about LISTS and FOR LOOPS
+4. Fill in your `mission_report.txt` as you go!
+
+## Learning Objectives:
+- Learn about **lists** — storing many objects in one variable
+- Learn about **for loops** — doing the same thing to every item in a list
+- Understand `append()` — adding new items to a list
+- Learn about removing items from a list safely (the "to_remove" pattern)
+- Use `clock.schedule_interval()` for timed events
+- Understand functions that **return values** (`get_asteroid_speed()`)
+
+## 🚀 Step-by-Step Challenges:
+
+### Step 1: Play and Tweak (Beginner)
+1. Run the game and try to survive! How long can you last?
+2. Find `ASTEROID_SPEED = 3` and change it to `1`. Run again — is it easier?
+3. Now try `ASTEROID_SPEED = 6`. Whoa! 🏎️
+4. Find `lives = 3` and change it to `5`. More chances to survive!
+5. Look at the console output — it shows messages every time the asteroids
+   list changes! Watch for the 📦 and 🗑️ messages.
+
+✅ **Checkpoint:** You've completed Step 1 when you can change the speed
+   and lives, and you've seen the list messages in the console!
+
+### Step 2: Unlock Sprites and Invincibility (Intermediate)
+1. Find `USE_SPRITES = False` and change it to `True` — now you have
+   a real spaceship! 🚀
+2. Run the game. Look at the console — what message do you see?
+3. Find `USE_INVINCIBILITY = False` and change it to `True`
+4. Play the game and get hit. What happens to your ship? (Watch it blink!)
+5. Find the line with `clock.schedule_unique(end_invincibility, 2.0)`.
+   The `2.0` means 2 seconds. Try changing it to `5.0` or `0.5`!
+
+✅ **Checkpoint:** You've completed Step 2 when you can see sprites
+   and your ship blinks after getting hit!
+
+### Step 3: Understand Lists — The Big New Concept! (Advanced)
+This is the most important step this week! Take your time with this one.
+
+1. Find this line near the top of the code:
+   ```
+   asteroids = []
+   ```
+   The `[]` creates an **empty list**. Think of it like an empty backpack!
+   In Week 01, if you wanted multiple coins, you'd need `coin1`, `coin2`,
+   `coin3`... Lists solve this — ONE variable holds ALL the asteroids!
+
+2. Find the `spawn_asteroid()` function. Look for this line:
+   ```
+   asteroids.append(asteroid)
+   ```
+   `append()` adds a new item to the END of the list.
+   It's like putting a new book in your backpack!
+   Watch the console — every time this runs, you'll see:
+   `📦 asteroids.append(asteroid) → list now has X item(s)`
+
+3. Now find the for loop in `update()` that moves asteroids:
+   ```
+   for asteroid in asteroids:
+       asteroid.y += current_speed
+   ```
+   This loop visits EVERY asteroid in the list and moves it down.
+   Whether there are 2 or 200, this SAME code handles them all!
+   Imagine writing `asteroid1.y += 3`, `asteroid2.y += 3`... for each one. 😵
+
+4. Find the "to_remove" pattern in `update()`:
+   ```
+   asteroids_to_remove = []
+   ```
+   Read the comment above it! It explains why we can't remove items
+   from a list while looping through it. Watch the console for:
+   `🗑️  asteroids.remove() × 1 → list now has X item(s)`
+
+5. Enable bonus stars: `USE_BONUS_STARS = True`
+   Play the game and watch the console. Can you spot where bonus stars
+   use the EXACT same pattern? (Hint: look for `bonus_stars = []`)
+
+✅ **Checkpoint:** You've completed Step 3 when you can explain what
+   `append()` does and you've seen the 📦 and 🗑️ console messages!
+
+### Step 4: Crank Up the Difficulty! (Creative)
+1. Enable `USE_INCREASING_DIFFICULTY = True`
+   - Play for a while. Do you notice the asteroids getting faster?
+   - A new "Speed" display appears on screen — watch it climb!
+2. Find `clock.schedule_interval(spawn_asteroid, 1.5)` near the bottom
+   - The `1.5` means "every 1.5 seconds". Try changing it!
+   - Set it to `0.5` for asteroid rain! ☔ Or `3.0` for a chill game
+3. Enable ALL features at once! Set every toggle to True and play.
+   How does the game feel with everything enabled?
+
+✅ **Checkpoint:** You've completed Step 4 when you've played with
+   all features enabled and tweaked the spawn timing!
+
+## 🤔 Thinking Questions:
+Answer these in your `mission_report.txt`! There are no wrong answers —
+just explain your thinking.
+
+1. In Week 01, imagine you had `coin1`, `coin2`, `coin3`... all the way
+   up to `coin50`. You'd need 50 variables and 50 collision checks!
+   How do lists make this easier?
+
+2. Why do we use `for asteroid in asteroids:` instead of writing
+   `asteroid1.y += 3`, `asteroid2.y += 3`, `asteroid3.y += 3` for each?
+   What if the number of asteroids keeps changing — how does the loop help?
+
+3. What would happen if we NEVER removed asteroids from the list, even
+   after they fall off the screen? (Hint: watch the "Asteroids on screen"
+   counter. Imagine if that number kept going up forever... 📈)
+
+4. We use a separate `asteroids_to_remove` list instead of removing asteroids
+   while looping. Want to know why? Try this experiment:
+   - Find the removal code in `update()` (search for `asteroids_to_remove`)
+   - What do you think would go wrong if you removed items from a list
+     while counting through it? (Imagine someone pulling cards from a deck
+     while you're trying to count them!)
+
+5. Remember when you discovered `clock.schedule_interval()` in Week 01?
+   Can you explain in your own words what
+   `clock.schedule_interval(spawn_asteroid, 1.5)` does?
+
+## 🎯 Bonus Challenges:
+These are extra challenges for when you finish early or want more!
+Pick whichever ones sound fun — you don't have to do them all.
+
+1. **High Score Tracker:** Create a variable `high_score = 0` at the top.
+   When the game ends, update it: `high_score = max(score, high_score)`.
+   Show it on the game over screen! Can you beat your own record?
+
+2. **Random Asteroid Sizes:** Right now all asteroids are 30x30.
+   Make some bigger and some smaller using `random.choice([20, 30, 40])`.
+   You'll need to change the size in `spawn_asteroid()` where the Rect
+   is created. Bigger = harder to dodge!
+
+3. **Screen-Clear Power-Up:** Add a power-up that clears all asteroids!
+   Here's a recipe to get you started:
+   - Create a new list: `powerups = []`
+   - Write a `spawn_powerup()` function (copy `spawn_bonus_star` as a base)
+   - When the player touches it: `asteroids.clear()` — boom, all gone!
+   - Add a timer: `clock.schedule_interval(spawn_powerup, 30.0)`
+
+4. **Asteroid Color Party:** Make asteroids change color! In the `draw()`
+   function where asteroids are drawn as circles, try using
+   `random.choice([(255,100,100), (100,255,100), (100,100,255)])`
+   instead of the gray color. What happens? Why do they keep changing?
+
+5. **Two-Player Mode:** Add a second spaceship controlled with WASD keys!
+   Start by copying how `player` is created, but name it `player2`.
+   Add WASD movement in `update()` (use `keyboard.a`, `keyboard.d`, etc.)
+   and add collision checks for `player2` too!
+
+## 📬 How to Submit:
+1. Open `mission_report.txt` in your code editor
+2. Fill in each section as you complete the steps
+3. Save the file
+4. Email your completed `mission_report.txt` to your instructor
+   - Subject line: **"Week 02 Mission Report - [Your Name]"**
+   - Attach the file, or copy-paste the contents into the email
+5. OPTIONAL: Also attach your modified `star_dodger.py` if you made
+   cool changes you want to show off!
+
+## 💡 Tips for Success:
+- Save your work before making changes!
+- If something breaks, change the settings back to False
+- Try changing ONE thing at a time — it's easier to see what changed
+- Watch the console output — it shows what's happening inside the lists!
+- The "Asteroids on screen" counter shows the list growing and shrinking
+- Don't be afraid to experiment — that's how real programmers learn! 🧪
+
+## 🔧 Troubleshooting:
+- **Game won't run?** Make sure you have Pygame Zero installed
+- **Images not showing?** That's okay! The game works with shapes too
+  (keep USE_SPRITES = False)
+- **Too hard?** Lower ASTEROID_SPEED to 1 or increase lives to 10
+- **Too easy?** Raise ASTEROID_SPEED to 6 or set lives to 1
+- **Asteroids not spawning?** Make sure you didn't accidentally delete
+  the `clock.schedule_interval` line at the bottom of the file
+- **Game freezes after game over?** Press SPACE to restart!
+- **Code has errors?** Check that you didn't accidentally delete any
+  important lines. You can always copy the original code back!

@@ -1,4 +1,5 @@
 [flake8]
 max-line-length = 100
+exclude = .venv,__pycache__,.fastembed_cache
 builtins = Actor, animate, clock, keys, keyboard, music, Rect, screen, sounds, images, tone, WIDTH, HEIGHT
 

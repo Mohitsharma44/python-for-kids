@@ -1,0 +1,176 @@
+========================================
+🚀 STAR DODGER — MISSION REPORT 🚀
+========================================
+
+Pilot Name: ____________________
+Date:        ____________________
+
+Instructions: Fill in each section as you complete the steps in
+assignment.txt. Write in your own words — there are no wrong answers!
+When you're done, save this file and email it to your instructor.
+
+
+========================================
+STEP 1: Play and Tweak
+========================================
+
+1. What was the highest score you got on your first try?
+
+   > (your answer here)
+
+2. What happened when you changed ASTEROID_SPEED to 1?
+   What about 6?
+
+   > (your answer here)
+
+3. What did you notice in the console output while playing?
+   What do the 📦 messages mean?
+
+   > (your answer here)
+
+
+========================================
+STEP 2: Sprites and Invincibility
+========================================
+
+1. What message appeared in the console when you turned on sprites?
+
+   > (your answer here)
+
+2. What happened to your ship when you got hit with
+   USE_INVINCIBILITY = True?
+
+   > (your answer here)
+
+3. What did changing the shield duration (2.0) do?
+   What value did you try?
+
+   > (your answer here)
+
+
+========================================
+STEP 3: Lists — The Big New Concept!
+========================================
+
+1. In your own words, what is a list? Why is it better than having
+   coin1, coin2, coin3 as separate variables?
+
+   > (your answer here)
+
+2. What does append() do? Can you describe it in one sentence?
+
+   > (your answer here)
+
+3. Look at the console while playing. Write down one example of
+   a 📦 (append) message and one 🗑️ (remove) message you saw:
+
+   📦 message: (copy-paste from console)
+
+   🗑️ message: (copy-paste from console)
+
+4. Did you find where bonus stars use the same list pattern?
+   What is the list called?
+
+   > (your answer here)
+
+
+========================================
+STEP 4: Crank Up the Difficulty!
+========================================
+
+1. With USE_INCREASING_DIFFICULTY on, what was the fastest speed
+   you saw on screen before game over?
+
+   > (your answer here)
+
+2. What value did you change the spawn interval (1.5) to?
+   How did it change the game?
+
+   > (your answer here)
+
+3. How did the game feel with ALL features enabled at once?
+
+   > (your answer here)
+
+
+========================================
+THINKING QUESTIONS
+========================================
+Take your time with these. Try to explain like you're teaching
+a friend who has never seen the code.
+
+Q1. How do lists make it easier than having coin1, coin2, ... coin50?
+
+   > (your answer here)
+
+Q2. Why do we use a for loop instead of writing the same line for
+    every single asteroid?
+
+   > (your answer here)
+
+Q3. What would happen if we never removed asteroids from the list?
+
+   > (your answer here)
+
+Q4. Why can't we remove items from a list while looping through it?
+    (Use the card-counting example if it helps!)
+
+   > (your answer here)
+
+Q5. Explain what clock.schedule_interval(spawn_asteroid, 1.5) does,
+    in your own words:
+
+   > (your answer here)
+
+
+========================================
+BONUS CHALLENGES (optional — pick any!)
+========================================
+If you tried any bonus challenges, describe what you did:
+
+Which challenge(s) did you try? ____________________
+
+What did you change in the code?
+
+   > (describe what you added or changed)
+
+Did it work? What happened?
+
+   > (your answer here)
+
+
+========================================
+MY FAVORITE SETTINGS
+========================================
+What were your favorite values for each setting?
+
+   ASTEROID_SPEED = ____
+   lives          = ____
+   spawn interval = ____ (the 1.5 number)
+
+   USE_SPRITES               = True / False
+   USE_BONUS_STARS            = True / False
+   USE_INCREASING_DIFFICULTY  = True / False
+   USE_INVINCIBILITY          = True / False
+
+
+========================================
+FINAL THOUGHTS
+========================================
+
+What was the most interesting thing you learned this week?
+
+   > (your answer here)
+
+What was the most confusing part? (It's okay if something was hard!)
+
+   > (your answer here)
+
+Rate this mission: ⭐ ⭐ ⭐ ⭐ ⭐  (circle or highlight 1-5 stars)
+
+
+========================================
+📬 HOW TO SUBMIT:
+Save this file and email it to your instructor.
+Subject: "Week 02 Mission Report - [Your Name]"
+========================================

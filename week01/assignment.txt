@@ -4,6 +4,7 @@
 1. Open `gold_collector_game.py` in your code editor
 2. Run the game to see how it works
 3. Follow the instructions in the code to unlock new features!
+4. Fill in your `mission_report.txt` as you go!
 
 ## Learning Objectives:
 - Understand basic game programming concepts
@@ -48,6 +49,16 @@
 2. Create multiple coins that appear at the same time
 3. Add obstacles that the player should avoid
 4. Make the coin move automatically every 3 seconds
+
+## 📬 How to Submit:
+1. Open `mission_report.txt` in your code editor
+2. Fill in each section as you complete the steps
+3. Save the file
+4. Email your completed `mission_report.txt` to your instructor
+   - Subject line: **"Week 01 Mission Report - [Your Name]"**
+   - Attach the file, or copy-paste the contents into the email
+5. OPTIONAL: Also attach your modified `gold_collector_game.py` if you
+   made cool changes you want to show off!
 
 ## 💡 Tips for Success:
 - Save your work before making changes!
