@@ -15,7 +15,7 @@ WORKDIR $HOME
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     python3 python3-pip python3-tk python3-dev \
     build-essential libffi-dev \
-    git curl wget \
+    git curl wget unzip \
     libgl1 libglu1-mesa \
     libsdl2-2.0-0 libsdl2-image-2.0-0 libsdl2-mixer-2.0-0 libsdl2-ttf-2.0-0 \
     fonts-dejavu fonts-dejavu-extra && \
@@ -58,11 +58,22 @@ RUN mkdir -p "$HOME/.local/share/applications" && \
     printf '[Default Applications]\ntext/plain=code.desktop\ntext/x-python=code.desktop\ntext/x-python3=code.desktop\napplication/x-python-code=code.desktop\ntext/csv=code.desktop\ntext/markdown=code.desktop\ntext/html=code.desktop\ntext/css=code.desktop\ntext/javascript=code.desktop\napplication/json=code.desktop\napplication/xml=code.desktop\ntext/xml=code.desktop\n' \
         > "$HOME/.config/mimeapps.list"
 
+# Pre-install Python extension (download vsix and extract — avoids OOM from code CLI)
+RUN EXT_DIR="$HOME/.vscode/extensions" && \
+    mkdir -p "$EXT_DIR" /tmp/vscode-ext && \
+    wget -q --max-redirect=5 \
+         "https://ms-python.gallery.vsassets.io/_apis/public/gallery/publisher/ms-python/extension/python/latest/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage" \
+         -O /tmp/vscode-ext/python.vsix && \
+    cd /tmp/vscode-ext && \
+    unzip -q python.vsix -d python-ext && \
+    VER=$(python3 -c "import json; print(json.load(open('python-ext/extension/package.json'))['version'])") && \
+    mv python-ext/extension "$EXT_DIR/ms-python.python-${VER}" && \
+    rm -rf /tmp/vscode-ext
+
 # Pre-configure VS Code with beginner-friendly settings
-# The Python extension installs on first use via .vscode/extensions.json in the repo
 RUN mkdir -p "$HOME/.config/Code/User"
 COPY vscode-settings.json $HOME/.config/Code/User/settings.json
-RUN chown -R 1000:0 "$HOME/.config/Code" "$HOME/.local/share/applications" "$HOME/.config/mimeapps.list"
+RUN chown -R 1000:0 "$HOME/.config/Code" "$HOME/.vscode" "$HOME/.local/share/applications" "$HOME/.config/mimeapps.list"
 
 
 ######### End Customizations ###########
