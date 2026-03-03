@@ -72,14 +72,15 @@ RUN mkdir -p "$HOME/.config/Code/User"
 COPY vscode-settings.json $HOME/.config/Code/User/settings.json
 
 # Startup sync script: ensures persistent profiles get latest IDE config from the image.
-# Uses Xfce autostart so it runs on every login regardless of Kasm file mappings.
+# Uses system-wide XDG autostart (/etc/xdg/autostart) so it runs on every login
+# regardless of Kasm file mappings or user profile state.
 COPY sync-ide-config.sh /usr/local/bin/sync-ide-config.sh
 RUN chmod +x /usr/local/bin/sync-ide-config.sh && \
-    mkdir -p "$HOME/.config/autostart" && \
+    mkdir -p /etc/xdg/autostart && \
     printf '[Desktop Entry]\nType=Application\nName=Sync IDE Config\nExec=/usr/local/bin/sync-ide-config.sh\nHidden=false\nNoDisplay=true\nX-GNOME-Autostart-enabled=true\n' \
-        > "$HOME/.config/autostart/sync-ide-config.desktop"
+        > /etc/xdg/autostart/sync-ide-config.desktop
 
-RUN chown -R 1000:0 "$HOME/.config/Code" "$HOME/.vscode" "$HOME/.local/share/applications" "$HOME/.config/mimeapps.list" "$HOME/.config/autostart"
+RUN chown -R 1000:0 "$HOME/.config/Code" "$HOME/.vscode" "$HOME/.local/share/applications" "$HOME/.config/mimeapps.list"
 
 
 ######### End Customizations ###########
