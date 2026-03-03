@@ -58,17 +58,14 @@ RUN mkdir -p "$HOME/.local/share/applications" && \
     printf '[Default Applications]\ntext/plain=code.desktop\ntext/x-python=code.desktop\ntext/x-python3=code.desktop\napplication/x-python-code=code.desktop\ntext/csv=code.desktop\ntext/markdown=code.desktop\ntext/html=code.desktop\ntext/css=code.desktop\ntext/javascript=code.desktop\napplication/json=code.desktop\napplication/xml=code.desktop\ntext/xml=code.desktop\n' \
         > "$HOME/.config/mimeapps.list"
 
-# Pre-install Python extension (download vsix and extract — avoids OOM from code CLI)
-RUN EXT_DIR="$HOME/.vscode/extensions" && \
-    mkdir -p "$EXT_DIR" /tmp/vscode-ext && \
-    wget -q --max-redirect=5 \
-         "https://ms-python.gallery.vsassets.io/_apis/public/gallery/publisher/ms-python/extension/python/latest/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage" \
-         -O /tmp/vscode-ext/python.vsix && \
-    cd /tmp/vscode-ext && \
-    unzip -q python.vsix -d python-ext && \
-    VER=$(python3 -c "import json; print(json.load(open('python-ext/extension/package.json'))['version'])") && \
-    mv python-ext/extension "$EXT_DIR/ms-python.python-${VER}" && \
-    rm -rf /tmp/vscode-ext
+# Pre-install Python extension pack (download vsix and extract — avoids OOM from code CLI)
+# The Python extension requires: debugpy (debugger), pylance (IntelliSense), python-envs
+COPY install-vscode-ext.sh /tmp/install-vscode-ext.sh
+RUN chmod +x /tmp/install-vscode-ext.sh && \
+    /tmp/install-vscode-ext.sh ms-python python && \
+    /tmp/install-vscode-ext.sh ms-python debugpy && \
+    /tmp/install-vscode-ext.sh ms-python vscode-pylance && \
+    rm /tmp/install-vscode-ext.sh
 
 # Pre-configure VS Code with beginner-friendly settings
 RUN mkdir -p "$HOME/.config/Code/User"
