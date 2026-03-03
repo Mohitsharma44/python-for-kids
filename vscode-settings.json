@@ -1,0 +1,19 @@
+{
+  "editor.fontSize": 16,
+  "editor.fontFamily": "'DejaVu Sans Mono', monospace",
+  "editor.wordWrap": "on",
+  "editor.minimap.enabled": false,
+  "editor.lineNumbers": "on",
+  "editor.renderWhitespace": "none",
+  "editor.formatOnSave": true,
+  "workbench.colorTheme": "Default Dark Modern",
+  "workbench.startupEditor": "none",
+  "workbench.tips.enabled": false,
+  "terminal.integrated.fontSize": 14,
+  "python.defaultInterpreterPath": "/usr/bin/python3",
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 2000,
+  "telemetry.telemetryLevel": "off",
+  "update.mode": "none",
+  "extensions.autoUpdate": false
+}

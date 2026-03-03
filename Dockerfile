@@ -11,11 +11,10 @@ WORKDIR $HOME
 
 ######### Customize Container Here ###########
 
-# System deps: Python, Thonny, SDL/OpenGL for pygame
+# System deps: Python, SDL/OpenGL for pygame
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    python3 python3-pip \
-    thonny python3-tk \
-    git curl \
+    python3 python3-pip python3-tk \
+    git curl wget \
     libgl1 libglu1-mesa \
     libsdl2-2.0-0 libsdl2-image-2.0-0 libsdl2-mixer-2.0-0 libsdl2-ttf-2.0-0 \
     fonts-dejavu fonts-dejavu-extra && \
@@ -25,14 +24,28 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
 COPY requirements.txt /tmp/requirements.txt
 RUN pip3 install --no-cache-dir -r /tmp/requirements.txt && rm /tmp/requirements.txt
 
-# Desktop launcher for Thonny (simple)
-RUN printf '#!/bin/bash\nexec thonny\n' \
-      > /usr/local/bin/launch_thonny && \
-    chmod +x /usr/local/bin/launch_thonny && \
+# --- VS Code ---
+# Install VS Code .deb (same approach as Kasm's official kasmweb/vs-code image)
+RUN ARCH=$(arch | sed 's/aarch64/arm64/g' | sed 's/x86_64/x64/g') && \
+    wget -q "https://update.code.visualstudio.com/latest/linux-deb-${ARCH}/stable" \
+         -O /tmp/vs_code.deb && \
+    apt-get update && \
+    apt-get install -y /tmp/vs_code.deb && \
+    rm /tmp/vs_code.deb && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Patch launcher: --no-sandbox is required for Electron apps inside Docker
+RUN sed -i 's|/usr/share/code/code|/usr/share/code/code --no-sandbox|g' \
+        /usr/share/applications/code.desktop && \
     mkdir -p "$HOME/Desktop" && \
-    printf '[Desktop Entry]\nType=Application\nName=Thonny (Python IDE)\nComment=Launch Thonny IDE\nExec=/usr/local/bin/launch_thonny\nIcon=thonny\nTerminal=false\nCategories=Development;Education;\nStartupNotify=true\n' \
-      > "$HOME/Desktop/thonny.desktop" && \
-    chmod +x "$HOME/Desktop/thonny.desktop"
+    cp /usr/share/applications/code.desktop "$HOME/Desktop/vscode.desktop" && \
+    chmod +x "$HOME/Desktop/vscode.desktop"
+
+# Pre-configure VS Code with beginner-friendly settings
+# The Python extension installs on first use via .vscode/extensions.json in the repo
+RUN mkdir -p "$HOME/.config/Code/User"
+COPY vscode-settings.json $HOME/.config/Code/User/settings.json
+RUN chown -R 1000:0 "$HOME/.config/Code"
 
 
 ######### End Customizations ###########

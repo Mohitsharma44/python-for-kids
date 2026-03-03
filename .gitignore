@@ -21,5 +21,6 @@ dist/
 
 # Editors/IDE
 .vscode/
+!.vscode/extensions.json
 .idea/
 
