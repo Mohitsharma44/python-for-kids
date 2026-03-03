@@ -70,7 +70,16 @@ RUN chmod +x /tmp/install-vscode-ext.sh && \
 # Pre-configure VS Code with beginner-friendly settings
 RUN mkdir -p "$HOME/.config/Code/User"
 COPY vscode-settings.json $HOME/.config/Code/User/settings.json
-RUN chown -R 1000:0 "$HOME/.config/Code" "$HOME/.vscode" "$HOME/.local/share/applications" "$HOME/.config/mimeapps.list"
+
+# Startup sync script: ensures persistent profiles get latest IDE config from the image.
+# Uses Xfce autostart so it runs on every login regardless of Kasm file mappings.
+COPY sync-ide-config.sh /usr/local/bin/sync-ide-config.sh
+RUN chmod +x /usr/local/bin/sync-ide-config.sh && \
+    mkdir -p "$HOME/.config/autostart" && \
+    printf '[Desktop Entry]\nType=Application\nName=Sync IDE Config\nExec=/usr/local/bin/sync-ide-config.sh\nHidden=false\nNoDisplay=true\nX-GNOME-Autostart-enabled=true\n' \
+        > "$HOME/.config/autostart/sync-ide-config.desktop"
+
+RUN chown -R 1000:0 "$HOME/.config/Code" "$HOME/.vscode" "$HOME/.local/share/applications" "$HOME/.config/mimeapps.list" "$HOME/.config/autostart"
 
 
 ######### End Customizations ###########
