@@ -33,3 +33,7 @@ if [ -d "$DEFAULT_PROFILE/.vscode/extensions" ]; then
         fi
     done
 fi
+
+# Fix ownership — files copied from image defaults are owned by root
+chown -R "$(id -u):$(id -g)" "$HOME/.config/Code" "$HOME/.vscode" \
+    "$HOME/.local/share/applications" 2>/dev/null || true
